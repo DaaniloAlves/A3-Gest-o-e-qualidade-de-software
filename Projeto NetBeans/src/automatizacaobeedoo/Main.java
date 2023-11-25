@@ -43,7 +43,7 @@ public class Main extends Metodos {
             // instanciando um wait explicito
             WebDriverWait espera = new WebDriverWait(driver, Duration.ofSeconds(15));
             driver.manage().window().maximize();
-            
+
             try {
                 do {
                     // entrando no site do beedoo
@@ -115,10 +115,10 @@ public class Main extends Metodos {
                         // logica pra definir o item desejado
                         ArrayList<String> itensDesejados = new ArrayList<>();
 
-                       
                         switch (acao) {
-                             // adicionando apenas o cordao, se a caixinha do cordao estiver marcada
-                            case "comCordao" -> itensDesejados.add("product_20431");
+                            // adicionando apenas o cordao, se a caixinha do cordao estiver marcada
+                            case "comCordao" ->
+                                itensDesejados.add("product_20431");
                             // adicionando muitos produtos, se a caixinha do cordao estiver desmarcada
                             case "semCordao" -> {
                                 for (int i = 22979; i <= 23900; i++) {
@@ -129,13 +129,13 @@ public class Main extends Metodos {
                                 }
                             }
                             // print para verificar se algum parametro foi passado errado
-                            default -> System.out.println("Array vazio, 'string acao' teve valor errado");
-                        }      
+                            default ->
+                                System.out.println("Array vazio, 'string acao' teve valor errado");
+                        }
 
                         // print para indicar os id's dos produtos selecionados
                         System.out.println("Produtos desejados: " + itensDesejados);
 
-                        
                         ArrayList<String> produtosFinais = addCarrinho(itensDesejados, driver);
                         System.out.println("1 ou mais produtos disponiveis!\n Produtos selecionados: " + addCarrinho(itensDesejados, driver));
 
@@ -161,8 +161,9 @@ public class Main extends Metodos {
 
                             System.out.println("Produtos comprados: " + produtosFinais + ". Automatização concluída!");
                             deuCerto = true;
+                            Thread.sleep(5000);
                             driver.quit();
-
+                            JOptionPane.showMessageDialog(jf, "Compra(s) efetuada(s)!\nOs id's dos produtos comprados são: " + Main.produtosComprados, "Aviso", 1);
                         } catch (NullPointerException e) {
                             System.out.println("TENTANDO DE NOVO");
                         }
@@ -173,9 +174,7 @@ public class Main extends Metodos {
                 jf.show();
                 if (getDeuCerto() == false) {
                     JOptionPane.showMessageDialog(jf, "Navegador fechado\nInterrompendo o programa", "Aviso", 2);
-                } else {
-                    JOptionPane.showMessageDialog(jf, "Compra(s) efetuada(s)!\nOs id's dos produtos comprados são: " + Main.produtosComprados, "Aviso", 1);
-                }
+                } 
             } catch (NoSuchSessionException ns) {
 
             }

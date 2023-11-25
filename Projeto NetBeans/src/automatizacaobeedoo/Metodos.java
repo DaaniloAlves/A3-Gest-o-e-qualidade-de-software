@@ -3,9 +3,11 @@ package automatizacaobeedoo;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,9 +16,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Metodos {
 
     public static boolean existeXPATH(String st, WebDriver driver) {
-        
+
         // metodo que facilita a verificaçao do xpath
-        
         try {
             driver.findElement(By.xpath(st));
             return true;
@@ -27,9 +28,8 @@ public class Metodos {
     }
 
     public static boolean existeID(String st, WebDriver driver) {
-        
+
         // metodo que facilita a verificaçao do id
-        
         try {
             driver.findElement(By.id(st));
             return true;
@@ -39,11 +39,10 @@ public class Metodos {
     }
 
     public static ArrayList addCarrinho(ArrayList<String> e, WebDriver driver) throws InterruptedException {
-        
+
         // metodo para verificar se algum produto da lista está disponivel, e se estiver, adicionar ao carrinho
-        
         ArrayList<String> produtosAdicionados = new ArrayList<>();
-        
+
         boolean comprou = true;
         boolean produtoDisponivel = false;
 
@@ -80,31 +79,42 @@ public class Metodos {
 
     }
 
-    public static void comprarCarrinho(WebDriver driver, WebDriverWait wait) {
-        
+    public static void comprarCarrinho(WebDriver driver, WebDriverWait wait) throws InterruptedException {
+
         // abrindo o carrinho
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Meu carrinho"))).click();
-        
-        List<WebElement> testeFinal = driver.findElements(By.xpath("//button[contains(@class, 'btn-success')]"));
-        Iterator<WebElement> testeitrFinal = testeFinal.iterator();
-        for (int i = testeFinal.size(); i >= (testeFinal.size() - 3); i--) {
-            try {
-                testeitrFinal.next().click();
-                System.out.println("Botao encontrado!");
-            } catch (ElementNotInteractableException e) {
-                System.out.println("Procurando btn-success correto...");
-            }
-        }
 
-        List<WebElement> testeFinal2 = driver.findElements(By.xpath("//button[contains(@class, 'btn-success')]"));
-        Iterator<WebElement> testeitrFinal2 = testeFinal2.iterator();
-        for (int i = testeFinal2.size(); i >= (testeFinal.size() - 3); i--) {
+        Thread.sleep(2000);
+        
+        List<WebElement> btnSuccess = driver.findElements(By.xpath("//button[contains(@class, 'btn-success')]"));
+        Iterator<WebElement> btnSuccessItr = btnSuccess.iterator();
+        System.out.println("botoes 'btn-success' encontrados: " + btnSuccess.size());
+        boolean btnSuccessEncontrado = false;
+        do {
             try {
-                testeitrFinal2.next().click();
+                btnSuccessItr.next().click();
                 System.out.println("Botao encontrado!");
-            } catch (ElementNotInteractableException e) {
+                btnSuccessEncontrado = true;
+            } catch (ElementNotInteractableException | TimeoutException e) {
                 System.out.println("Procurando btn-success correto...");
             }
-        }
+        } while (!btnSuccessEncontrado);
+        
+        Thread.sleep(2000);
+        
+        List<WebElement> btnSuccess2 = driver.findElements(By.xpath("//button[contains(@class, 'btn-success')]"));
+        Iterator<WebElement> btnSuccess2Itr = btnSuccess2.iterator();
+        System.out.println("botoes 'btn-success' encontrados: " + btnSuccess2.size());
+        boolean btnSuccess2Encontrado = false;
+        do {
+            try {
+                btnSuccess2Itr.next().click();
+                System.out.println("Botao encontrado!");
+                btnSuccess2Encontrado = true;
+            } catch (ElementNotInteractableException | TimeoutException e) {
+                System.out.println("Procurando btn-success2 correto...");
+            }
+        } while (!btnSuccess2Encontrado);
     }
 }
+
