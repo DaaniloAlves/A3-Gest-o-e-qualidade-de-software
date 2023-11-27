@@ -90,6 +90,7 @@ public class Interface extends javax.swing.JFrame {
         getContentPane().add(senhatxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 150, 30));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cordao.setForeground(new java.awt.Color(255, 255, 255));
         cordao.setText("Habilitar cordão");
@@ -98,23 +99,7 @@ public class Interface extends javax.swing.JFrame {
                 cordaoActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(286, Short.MAX_VALUE)
-                .addComponent(cordao)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(232, Short.MAX_VALUE)
-                .addComponent(cordao)
-                .addGap(48, 48, 48))
-        );
+        jPanel1.add(cordao, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 232, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
