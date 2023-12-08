@@ -44,16 +44,13 @@ public class BeedooJUnit extends Controlador {
     }
 
     
-    public void consolidado(String login, String senha, String acao, WebDriver driver) throws InterruptedException {
+    public void consolidado(String login, String senha, WebDriver driver) throws InterruptedException {
 
         try {
-
             // instanciando um wait explicito
             WebDriverWait espera = new WebDriverWait(driver, Duration.ofSeconds(15));
-
             try {
                 do {
-
                     // enviando o login e senha para o navegador e clicando no botao de entrar
                     logar(login, senha, driver);
 
@@ -75,31 +72,20 @@ public class BeedooJUnit extends Controlador {
                         Thread.sleep(3000);
 
                         // entrando na loja clicando no carrinho
-                        espera.until(ExpectedConditions.elementToBeClickable(By.className("fa-shopping-cart"))).click();
-
+                        clickClass("fa-shopping-cart", espera);
                         // thread sleep para esperar a pagina carregar e evitar conflitos
                         Thread.sleep(3000);
 
                         // logica pra definir o item desejado
                         ArrayList<String> itensDesejados = new ArrayList<>();
 
-                        switch (acao) {
-                            // adicionando apenas o cordao, se a caixinha do cordao estiver marcada
-                            case "comCordao" ->
-                                itensDesejados.add("product_20431");
-                            // adicionando muitos produtos, se a caixinha do cordao estiver desmarcada
-                            case "semCordao" -> {
+                            // adicionando um intervalo de muitos produtos
                                 for (int i = 22979; i <= 23900; i++) {
                                     if (i != 23280) {
                                         String pd = "product_" + i;
                                         itensDesejados.add(pd);
                                     }
                                 }
-                            }
-                            // print para verificar se algum parametro foi passado errado
-                            default ->
-                                System.out.println("Array vazio, 'string acao' teve valor errado");
-                        }
 
                         // print para indicar os id's dos produtos selecionados
                         System.out.println("Produtos desejados: " + itensDesejados);

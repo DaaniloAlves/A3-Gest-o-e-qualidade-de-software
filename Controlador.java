@@ -121,7 +121,7 @@ public class Controlador {
                 comprou = false;
             }
             if (!produtoDisponivel) {
-                Thread.sleep(15000);
+                Thread.sleep(10000);
                 System.out.println("atualizando...");
                 driver.navigate().refresh();
             }

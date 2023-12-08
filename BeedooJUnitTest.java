@@ -38,6 +38,7 @@ public class BeedooJUnitTest {
 
     @AfterClass
     public static void tearDownClass() {
+        driver.quit();
     }
 
     @Before
@@ -48,20 +49,6 @@ public class BeedooJUnitTest {
     public void tearDown() {
     }
 
-    @Test
-    public void testLoginCerto() {
-
-    }
-
-    @Test
-    public void testGetDeuCerto() {
-        System.out.println("getDeuCerto");
-        boolean expResult = false;
-        boolean result = BeedooJUnit.getDeuCerto();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     @Test
     public void logarErrado() throws InterruptedException {
@@ -76,7 +63,7 @@ public class BeedooJUnitTest {
     
     @Test
     public void logarCerto() throws InterruptedException {
-        Controlador.logar(" ",                                                                                                                                                                                                                                               " ", driver);
+        Controlador.logar("","", driver);
         Thread.sleep(500);
         // logica para verificar se o login foi aceito, funciona através de um pop-up que aparece caso o login falhe
         boolean logado = !(Controlador.existeXPATH("//div[contains(@class, 'alert bs-callout bs-callout-danger fade in alert_beebot')]", driver));
@@ -88,7 +75,7 @@ public class BeedooJUnitTest {
     @Test
     public void testConsolidado() throws Exception {
         BeedooJUnit comprar = new BeedooJUnit();
-        comprar.consolidado(" ", " ", "comCordao", driver);
+        comprar.consolidado("","", driver);
         assertEquals(comprar, comprar.getDeuCerto());
     }
 
